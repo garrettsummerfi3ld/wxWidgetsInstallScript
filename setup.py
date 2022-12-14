@@ -19,7 +19,6 @@ def main():
 
 def downloadWxWidgets():
     # Download wxWidgets
-
     print("[-] Downloading wxWidgets...")
     urllib.request.urlretrieve(url, filename)
     print("[-] Download complete!")
