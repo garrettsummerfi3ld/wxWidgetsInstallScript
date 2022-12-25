@@ -2,29 +2,54 @@ import ctypes
 import urllib.request
 import os
 import shutil
+import hashlib
+import progressbar
 
 # Variables
 url = "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.1/wxWidgets-3.2.1.zip"
 filename = "wxWidgets-3.2.1.zip"
 finalpath = "C:\\wxWidgets-3.2.1"
+checksum = "b0323a4771415faf1488d284079bdfc56a3586c2"
+pbar = None
 
 
 def main():
     # Main
-    downloadWxWidgets()
-    extractWxWidgets()
-    buildWxWidgets()
-    setEnvironmentVariables()
+    download_wxwidgets()
+    extract_wxwidgets()
+    build_wxwidgets()
+    set_environment_variables()
 
 
-def downloadWxWidgets():
+def show_progress(block_num, block_size, total_size):
+    # Progress bar
+    global pbar
+    if pbar is None:
+        pbar = progressbar.ProgressBar(maxval=total_size)
+        pbar.start()
+
+    downloaded = block_num * block_size
+    if downloaded < total_size:
+        pbar.update(downloaded)
+    else:
+        pbar.finish()
+        pbar = None
+
+
+def download_wxwidgets():
     # Download wxWidgets
     print("[-] Downloading wxWidgets...")
-    urllib.request.urlretrieve(url, filename)
+    urllib.request.urlretrieve(url, filename, show_progress)
     print("[-] Download complete!")
+    print("[-] Checking checksum...")
+    if hashlib.sha1(open(filename, "rb").read()).hexdigest() == checksum:
+        print("[-] Checksum matches!")
+    else:
+        print("[!] Checksum does not match!")
+        exit(0)
 
 
-def extractWxWidgets():
+def extract_wxwidgets():
     # Extract wxWidgets
     print("[-] Extracting wxWidgets...")
     shutil.unpack_archive(filename, finalpath)
@@ -32,7 +57,7 @@ def extractWxWidgets():
     print("[-] Extraction complete!")
 
 
-def buildWxWidgets():
+def build_wxwidgets():
     # Build wxWidgets
     # This is a bit of a hack, but it works
     print("[-] Building wxWidgets...")
@@ -48,14 +73,14 @@ def buildWxWidgets():
     print("[-] Build complete!")
 
 
-def setEnvironmentVariables():
+def set_environment_variables():
     # Set environment variables
     print("[-] Setting environment variables...")
     os.system(f"setx WXWIN \"{finalpath}\" /M")
     print("[-] Environment variables set!")
 
 
-def checkAdmin():
+def check_admin():
     # Check if running as admin
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
@@ -65,7 +90,7 @@ def checkAdmin():
 
 if __name__ == "__main__":
     print("[-] Checking for admin privileges...")
-    if checkAdmin():
+    if check_admin():
         main()
     else:
         print("[!] Please run as admin")

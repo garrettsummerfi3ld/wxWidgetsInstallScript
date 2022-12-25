@@ -23,7 +23,8 @@ Current configurations and architectures built are:
 
 ## Steps to run
 
-- Clone or download `setup.py`
+- Clone repository
+- Run `pip install -r requirements.txt`
 - Open an **administrative** Visual Studio PowerShell or Command Prompt
   - You may need to go to the Start Menu > Visual Studio (`Version`) > Developer ... > Right-click and Run as Administrator
 - `cd` to your downloaded `setup.py` file
