@@ -17,6 +17,7 @@ def main():
     # Main
     download_wxwidgets()
     extract_wxwidgets()
+    test_msbuild()
     build_wxwidgets()
     set_environment_variables()
 
@@ -56,6 +57,14 @@ def extract_wxwidgets():
     shutil.move(os.getcwd() + f"\\{filename}", f"{finalpath}.zip")
     print("[-] Extraction complete!")
 
+def test_msbuild():
+    # Test if MSBuild is installed
+    print("[-] Testing MSBuild...")
+    if os.system("msbuild") == 1:
+        print("[!] MSBuild not found!")
+        exit(1)
+    else:
+        print("[-] MSBuild found!")
 
 def build_wxwidgets():
     # Build wxWidgets
@@ -94,4 +103,4 @@ if __name__ == "__main__":
         main()
     else:
         print("[!] Please run as admin")
-        exit(0)
+        exit(1)
