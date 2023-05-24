@@ -56,7 +56,6 @@ def extract_wxwidgets():
     shutil.move(os.getcwd() + f"\\{filename}", f"{finalpath}.zip")
     print("[-] Extraction complete!")
 
-
 def build_wxwidgets():
     # Build wxWidgets
     # This is a bit of a hack, but it works
@@ -94,4 +93,4 @@ if __name__ == "__main__":
         main()
     else:
         print("[!] Please run as admin")
-        exit(0)
+        exit(1)
