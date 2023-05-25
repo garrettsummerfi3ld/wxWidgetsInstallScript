@@ -4,6 +4,8 @@ import os
 import shutil
 import hashlib
 import progressbar
+import subprocess
+import vswhere
 
 # Variables
 url = "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.1/wxWidgets-3.2.1.zip"
@@ -56,19 +58,22 @@ def extract_wxwidgets():
     shutil.move(os.getcwd() + f"\\{filename}", f"{finalpath}.zip")
     print("[-] Extraction complete!")
 
+
 def build_wxwidgets():
     # Build wxWidgets
-    # This is a bit of a hack, but it works
+    # It is a bit of a hack, but it works
+    msbuild_path = find_msbuild()
+    print(msbuild_path)
     print("[-] Building wxWidgets...")
     os.chdir(f"{finalpath}\\build\\msw")
     print("[-] Building wxWidgets Debug (x64)...")
-    os.system("msbuild wx_vc17.sln /p:Configuration=Debug /p:Platform=x64")
+    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Debug", "/p:Platform=x64"])
     print("[-] Building wxWidgets Release (x64)...")
-    os.system("msbuild wx_vc17.sln /p:Configuration=Release /p:Platform=x64")
+    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Release", "/p:Platform=x64"])
     print("[-] Building wxWidgets Debug (Win32)...")
-    os.system("msbuild wx_vc17.sln /p:Configuration=Debug /p:Platform=Win32")
+    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Debug", "/p:Platform=Win32"])
     print("[-] Building wxWidgets Release (Win32)...")
-    os.system("msbuild wx_vc17.sln /p:Configuration=Release /p:Platform=Win32")
+    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Release", "/p:Platform=Win32"])
     print("[-] Build complete!")
 
 
@@ -77,6 +82,19 @@ def set_environment_variables():
     print("[-] Setting environment variables...")
     os.system(f"setx WXWIN \"{finalpath}\" /M")
     print("[-] Environment variables set!")
+
+
+def find_msbuild():
+    # Find msbuild.exe
+    print("[-] Finding msbuild.exe...")
+    vspath = vswhere.get_latest_path()
+    print(vspath)
+    if vspath is not None:
+        print("[-] Found msbuild.exe!")
+        return vspath + "\\MSBuild\\Current\\Bin\\msbuild.exe"
+    else:
+        print("[!] Could not find msbuild.exe!")
+        exit(0)
 
 
 def check_admin():

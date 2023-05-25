@@ -4,6 +4,8 @@ A small Python script to install wxWidgets 3.2.1 and build automatically.
 
 Tested on Windows 10/11 with Visual Studio 2022 (17)
 
+GitHub Actions runs successfully on Windows 10/11 with Visual Studio 2019 (16) and 2022 (17)
+
 ## Requirements
 
 - Visual Studio with Desktop C++ installed
@@ -25,7 +27,7 @@ Current configurations and architectures built are:
 
 - Clone repository
 - Run `pip install -r requirements.txt`
-- Open an **administrative** Visual Studio PowerShell or Command Prompt
+- Open an **administrative** PowerShell or Command Prompt
   - You may need to go to the Start Menu > Visual Studio (`Version`) > Developer ... > Right-click and Run as Administrator
 - `cd` to your downloaded `setup.py` file
 - `python .\setup.py`

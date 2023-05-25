@@ -1,1 +1,2 @@
 progressbar33==2.4
+vswhere==1.4.0
