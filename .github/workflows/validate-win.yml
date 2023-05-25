@@ -19,8 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
-        win-version: ["windows-2019", "windows-2022"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        win-version: ["windows-2019", "windows-2022", "windows-latest"]
 
     steps:
       - uses: actions/checkout@v3
@@ -37,3 +37,9 @@ jobs:
       - name: Run script
         run: |
           python setup.py
+      - name: Output PATH
+        run: |
+          echo $PATH
+      - name: Run Minimal wxWidgets sample
+        run: |
+          msbuild C:\wxWidgets-3.2.1\samples\minimal\minimal.vcxproj
