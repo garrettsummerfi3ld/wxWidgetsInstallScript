@@ -6,10 +6,10 @@ import hashlib
 import progressbar
 
 # Variables
-url = "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.1/wxWidgets-3.2.1.zip"
-filename = "wxWidgets-3.2.1.zip"
-finalpath = "C:\\wxWidgets-3.2.1"
-checksum = "b0323a4771415faf1488d284079bdfc56a3586c2"
+url = "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.2.1/wxWidgets-3.2.2.1.zip"
+filename = "wxWidgets-3.2.2.1.zip"
+finalpath = "C:\\wxWidgets-3.2.2.1"
+checksum = "032fb3fe03d62253927cbdac3982bfbac1e5633d"
 pbar = None
 
 
