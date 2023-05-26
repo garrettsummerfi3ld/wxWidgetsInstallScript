@@ -46,7 +46,7 @@ jobs:
           $folderWildCard = "wxWidgets-*"
           $folder = Get-ChildItem -Path "C:\" -Filter $folderWildCard -Directory | Select-Object -First 1
           $folderPath = $folder.FullName  # Get the full path of the selected folder
-          msbuild "$folderPath\samples\minimal\minimal_vc17.sln"
+          msbuild "$folderPath\samples\minimal\minimal_vc16.sln"
       - name: Run Minimal wxWidgets sample (VS 2022)
         if: matrix.win-version == 'windows-2022' || matrix.win-version == 'windows-latest'
         run: |
