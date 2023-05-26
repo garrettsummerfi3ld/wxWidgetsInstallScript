@@ -4,7 +4,14 @@ A small Python script to install wxWidgets 3.2.1 and build automatically.
 
 Tested on Windows 10/11 with Visual Studio 2022 (17)
 
-GitHub Actions runs successfully on Windows 10/11 with Visual Studio 2019 (16) and 2022 (17)
+GitHub Actions runs successfully on Windows 10/11 with Visual Studio 2019 (16) and 2022 (17). You can verify with the "Validate install" workflow running on a matrix of Python versions and Windows versions.
+
+| Workflow           | Status                                                                                                                                                                                                                                        |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Validate install   | [![Validate install](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/validate-win.yml/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/validate-win.yml)             |
+| Pytest with flake8 | [![Pytest with flake8](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/test.yml/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/test.yml)                           |
+| Pylint             | [![Pylint](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/pylint.yml/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/pylint.yml)                                   |
+| CodeQL             | [![CodeQL](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/github-code-scanning/codeql) |
 
 ## Requirements
 
