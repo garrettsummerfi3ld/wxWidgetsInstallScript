@@ -19,8 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
-        win-version: ["windows-2019", "windows-2022"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        win-version: ["windows-2019", "windows-2022", "windows-latest"]
 
     steps:
       - uses: actions/checkout@v3
@@ -37,3 +37,26 @@ jobs:
       - name: Run script
         run: |
           python setup.py
+      - name: Output PATH
+        run: |
+          echo $PATH
+      - name: Run Minimal wxWidgets sample (VS 2019)
+        if: matrix.win-version == 'windows-2019'
+        run: |
+          $folderWildCard = "wxWidgets-*"
+          $folder = Get-ChildItem -Path "C:\" -Filter $folderWildCard -Directory | Select-Object -First 1
+          $folderPath = $folder.FullName  # Get the full path of the selected folder
+          msbuild "$folderPath\samples\minimal\minimal_vc16.sln"
+      - name: Run Minimal wxWidgets sample (VS 2022)
+        if: matrix.win-version == 'windows-2022' || matrix.win-version == 'windows-latest'
+        run: |
+          $folderWildCard = "wxWidgets-*"
+          $folder = Get-ChildItem -Path "C:\" -Filter $folderWildCard -Directory | Select-Object -First 1
+          $folderPath = $folder.FullName  # Get the full path of the selected folder
+          msbuild "$folderPath\samples\minimal\minimal_vc17.sln"
+      - name: Find built binary
+        run: |
+          $folderWildCard = "wxWidgets-*"
+          $folder = Get-ChildItem -Path "C:\" -Filter $folderWildCard -Directory | Select-Object -First 1
+          $binary = Get-ChildItem -Path "$folder\samples\minimal\vc_mswud\*.exe" | Select-Object -First 1
+          echo $binary
