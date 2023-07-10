@@ -12,6 +12,7 @@ GitHub Actions runs successfully on Windows 10/11 with Visual Studio 2019 (16) a
 | Pytest with flake8 | [![Pytest with flake8](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/test.yml/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/test.yml)                           |
 | Pylint             | [![Pylint](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/pylint.yml/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/pylint.yml)                                   |
 | CodeQL             | [![CodeQL](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/github-code-scanning/codeql) |
+| Qodana             | [![Qodana](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/qodana.yml/badge.svg)](https://github.com/garrettsummerfi3ld/wxWidgetsInstallScript/actions/workflows/qodana.yml)                                   |
 
 ## Requirements
 
