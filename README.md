@@ -1,6 +1,6 @@
 # wxWidgetsInstallScript
 
-A small Python script to install wxWidgets 3.2.1 and build automatically.
+A small Python script to install wxWidgets and build automatically on Windows.
 
 Tested on Windows 10/11 with Visual Studio 2022 (17)
 
@@ -17,7 +17,7 @@ GitHub Actions runs successfully on Windows 10/11 with Visual Studio 2019 (16) a
 ## Requirements
 
 - Visual Studio with Desktop C++ installed
-- Python 3
+- Python 3 (Tested at minimum 3.8)
 - Internet connection
 
 ## What does this script do?
