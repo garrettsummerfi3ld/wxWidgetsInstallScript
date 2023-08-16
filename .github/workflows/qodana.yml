@@ -6,7 +6,12 @@ on:
     branches:
       - main
       - 'releases/*'
-
+      
+permissions:
+  id-token: write
+  contents: write
+  security-events: write 
+    
 jobs:
   qodana:
     runs-on: ubuntu-latest
