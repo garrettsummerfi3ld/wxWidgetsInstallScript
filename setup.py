@@ -13,7 +13,8 @@ filename = "wxWidgets-3.2.3.zip"
 finalpath = "C:\\wxWidgets-3.2.3"
 checksum = "8ecc70034bf7d6ab8725114eb745404553cdf8dc"
 pbar = None
-
+configuration = [ "Debug", "Release" ]
+platform = [ "x64", "Win32" ]
 
 def main():
     # Main
@@ -61,19 +62,15 @@ def extract_wxwidgets():
 
 def build_wxwidgets():
     # Build wxWidgets
-    # It is a bit of a hack, but it works
     msbuild_path = find_msbuild()
+    vsversion = determine_msbuild_vs_version()
     print(msbuild_path)
     print("[-] Building wxWidgets...")
     os.chdir(f"{finalpath}\\build\\msw")
-    print("[-] Building wxWidgets Debug (x64)...")
-    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Debug", "/p:Platform=x64"])
-    print("[-] Building wxWidgets Release (x64)...")
-    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Release", "/p:Platform=x64"])
-    print("[-] Building wxWidgets Debug (Win32)...")
-    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Debug", "/p:Platform=Win32"])
-    print("[-] Building wxWidgets Release (Win32)...")
-    subprocess.run([msbuild_path, "wx_vc17.sln", "/p:Configuration=Release", "/p:Platform=Win32"])
+    for config in configuration:
+        for plat in platform:
+            print(f"[-] Building wxWidgets {config} ({plat})...")
+            subprocess.run([msbuild_path, f"wx_vc{vsversion}.sln", f"/p:Configuration={config}", f"/p:Platform={plat}"])
     print("[-] Build complete!")
 
 
@@ -96,6 +93,17 @@ def find_msbuild():
         print("[!] Could not find msbuild.exe!")
         exit(0)
 
+def determine_msbuild_vs_version():
+    # Determine which version of Visual Studio is installed
+    print("[-] Determining which version of Visual Studio is installed...")
+    vsversion = vswhere.get_latest_major_version()
+    if vsversion is not None:
+        print(f"[-] Visual Studio {vsversion} is installed!")
+        return vsversion
+    else:
+        print("[!] Could not determine which version of Visual Studio is installed!")
+        exit(1)
+    
 
 def check_admin():
     # Check if running as admin
