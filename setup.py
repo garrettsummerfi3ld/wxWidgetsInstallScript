@@ -8,10 +8,10 @@ import subprocess
 import vswhere
 
 # Variables
-url = "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.2.1/wxWidgets-3.2.2.1.zip"
-filename = "wxWidgets-3.2.2.1.zip"
-finalpath = "C:\\wxWidgets-3.2.2.1"
-checksum = "032fb3fe03d62253927cbdac3982bfbac1e5633d"
+url = "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.3/wxWidgets-3.2.3.zip"
+filename = "wxWidgets-3.2.3.zip"
+finalpath = "C:\\wxWidgets-3.2.3"
+checksum = "8ecc70034bf7d6ab8725114eb745404553cdf8dc"
 pbar = None
 
 
