@@ -3,6 +3,7 @@ import urllib.request
 import os
 import shutil
 import hashlib
+import requests
 import progressbar
 import subprocess
 import vswhere
@@ -37,6 +38,13 @@ def show_progress(block_num, block_size, total_size):
     else:
         pbar.finish()
         pbar = None
+
+def fetch_releases():
+    # Fetch releases
+    print("[-] Fetching releases...")
+    response = requests.get("https://api.github.com/repos/wxWidgets/wxWidgets/releases")
+    data = response.json()
+    print(data)
 
 
 def download_wxwidgets():
